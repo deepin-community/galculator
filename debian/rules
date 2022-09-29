@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# minimise needless linking
+export DEB_LDFLAGS_MAINT_APPEND= -Wl,--as-needed
+
+%:
+	dh $@ --with autoreconf
+
+override_dh_autoreconf:
+	dh_autoreconf -v --as-needed
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz
